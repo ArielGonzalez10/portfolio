@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Css -->
     <link rel="stylesheet" href="assets/css/style.css">
 
     <title>Portfolio - Ariel Gonzalez</title>
 </head>
 <body>
-    <!--Nav bar-->>
+    <!--Nav bar-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Ariel Gonzalez</a>
@@ -25,7 +26,9 @@
                     <a class="nav-link" href="#">Sobre Mi</a>
                     <a class="nav-link" href="#">Formación</a>
                     <a class="nav-link" >Proyectos</a>
-                    <a class="nav-link" >Contacto</a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">
+                        Contacto
+                    </a>
                 </div>
             </div>
         </div>
@@ -141,6 +144,45 @@
             toggle.textContent = newTheme === "dark" ? "☀️" : "🌙";
         });
     </script>
+<!--Modal de Contacto-->
+<div class="modal fade" id="contactModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header justify-content-center position-relative">
+                <img src="assets/img/Gmail.png" alt="Gmail" width="48">
+                <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="9f557163-d3d8-4c01-afd6-eeda253ec0fc">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" name="name" class="form-control" placeholder="Tu nombre completo" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="tuemail@gmail.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Mensaje</label>
+                        <textarea name="message" class="form-control" rows="4" placeholder="Escribí tu mensaje aquí..."
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Enviar mensaje
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
