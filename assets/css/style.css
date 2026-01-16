@@ -41,3 +41,31 @@
 .red-item:hover img {
   filter: grayscale(0%);
 }
+
+.about-card {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+[data-bs-theme="dark"] .about-card {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+
+/* Contenedor circular de la foto */
+.photo-wrapper {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 4px solid #0d6efd;     /* azul Bootstrap */
+}
+
+/* Imagen */
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
