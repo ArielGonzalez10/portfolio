@@ -53,8 +53,8 @@
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 /*ICONOS DE LAS REDES*/
+/* ESTILO PARA LA SECCION SOBRE MI */
 
-/*ESTILO PARA LA SECCION SOBRE MI*/
 /* Contenedor circular de la foto */
 .photo-wrapper {
   width: 180px;
@@ -62,7 +62,7 @@
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  border: 4px solid #0d6efd;     /* azul Bootstrap */
+  border: 4px solid #0d6efd;
 }
 
 /* Imagen */
@@ -70,6 +70,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Ajuste mobile */
+@media (max-width: 576px) {
+  .photo-wrapper {
+    width: 120px;
+    height: 120px;
+    border-width: 3px;
+  }
 }
 /*ESTILO PARA LA SECCION SOBRE MI*/
 
@@ -110,6 +119,12 @@
 /* Altura fija para evitar saltos */
 .carousel-item {
   height: 400px;
+}
+
+@media (min-width: 768px) {
+  .carousel-item {
+    height: 320px;
+  }
 }
 
 /* Imagen contenida y centrada */
