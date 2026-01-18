@@ -100,3 +100,34 @@
   box-shadow: 0 8px 25px rgba(0,0,0,0.6);
 }
 /*ESTILO PARA LOS PROYECTOS*/
+/* ESTILO PARA EL CARRUSEL */
+
+/* Limitar ancho */
+#carouselExampleIndicators {
+  max-width: 600px;
+}
+
+/* Altura fija para evitar saltos */
+.carousel-item {
+  height: 400px;
+}
+
+/* Imagen contenida y centrada */
+.carousel-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  margin: auto;
+  display: block;
+}
+
+/* Mejor interacción botones */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 10%;
+}
+
+/* Indicadores visibles en modo oscuro */
+[data-bs-theme="dark"] .carousel-indicators button {
+  background-color: #fff;
+}
