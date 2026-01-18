@@ -19,6 +19,7 @@
 .tech-item:hover img {
   filter: grayscale(0%);
 }
+/*ICONOS DE LAS TECNOLOGIAS*/
 
 /*ICONOS DE LAS REDES*/
 .red-item {
@@ -51,8 +52,9 @@
 [data-bs-theme="dark"] .about-card {
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
+/*ICONOS DE LAS REDES*/
 
-
+/*ESTILO PARA LA SECCION SOBRE MI*/
 /* Contenedor circular de la foto */
 .photo-wrapper {
   width: 180px;
@@ -69,3 +71,32 @@
   height: 100%;
   object-fit: cover;
 }
+/*ESTILO PARA LA SECCION SOBRE MI*/
+
+/*ESTILO PARA LOS PROYECTOS*/
+.project-card {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.project-card img {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  height: 180px;
+  object-fit: contain;
+}
+
+/* Ajuste en modo oscuro */
+[data-bs-theme="dark"] .project-card {
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+}
+/*ESTILO PARA LOS PROYECTOS*/
