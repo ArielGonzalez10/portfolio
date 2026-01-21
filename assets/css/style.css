@@ -226,32 +226,30 @@
 
 
 /* =========================
-   ANIMACIONES DE APARICIÓN
+   ANIMACIONES (SAFE MOBILE)
    ========================= */
 
-/* Estado inicial (oculto) */
+/* Estado inicial */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Cuando aparece */
+/* Activo */
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Variantes opcionales */
-.reveal-left {
-  transform: translateX(-40px);
-}
+/* En mobile: animación mínima */
+@media (max-width: 768px) {
+  .reveal {
+    transform: none;
+    opacity: 0;
+  }
 
-.reveal-right {
-  transform: translateX(40px);
-}
-
-.reveal-left.active,
-.reveal-right.active {
-  transform: translateX(0);
+  .reveal.active {
+    opacity: 1;
+  }
 }
