@@ -223,3 +223,35 @@
 [data-bs-theme="dark"] .modal-content {
   background-color: #352c28;
 }
+
+
+/* =========================
+   ANIMACIONES DE APARICIÓN
+   ========================= */
+
+/* Estado inicial (oculto) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Cuando aparece */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variantes opcionales */
+.reveal-left {
+  transform: translateX(-40px);
+}
+
+.reveal-right {
+  transform: translateX(40px);
+}
+
+.reveal-left.active,
+.reveal-right.active {
+  transform: translateX(0);
+}
