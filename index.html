@@ -110,57 +110,132 @@
         
     </section>
     <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content custom-card border-0">
-                <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold" id="contactModalLabel">Enviame un mensaje</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <form action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="9f557163-d3d8-4c01-afd6-eeda253ec0fc">
-                        
-                        <div class="mb-3">
-                            <label class="form-label small">Nombre Completo</label>
-                            <input type="text" name="name" class="form-control" placeholder="Juan Pérez" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small">Correo Electrónico</label>
-                            <input type="email" name="email" class="form-control" placeholder="nombre@ejemplo.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small">Mensaje</label>
-                            <textarea name="message" class="form-control" rows="4" placeholder="Hola Ariel, me gustaría contactarte por..." required></textarea>
-                        </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-card border-0">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold" id="contactModalLabel">Enviame un mensaje</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="contactForm">
+                    <input type="hidden" name="access_key" value="9f557163-d3d8-4c01-afd6-eeda253ec0fc">
+                    
+                    <div class="mb-3">
+                        <label class="form-label small">Nombre Completo</label>
+                        <input type="text" name="name" class="form-control" placeholder="Juan Pérez" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small">Correo Electrónico</label>
+                        <input type="email" name="email" class="form-control" placeholder="nombre@ejemplo.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small">Mensaje</label>
+                        <textarea name="message" class="form-control" rows="4" placeholder="Hola Ariel, me gustaría contactarte por..." required></textarea>
+                    </div>
 
-                        <input type="hidden" name="from_name" value="Portfolio Ariel">
-                        <input type="hidden" name="subject" value="Nuevo contacto desde tu Portfolio">
+                    <input type="hidden" name="from_name" value="Portfolio Ariel">
+                    <input type="hidden" name="subject" value="Nuevo contacto desde tu Portfolio">
 
-                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Enviar Mensaje</button>
-                    </form>
+                    <button type="submit" id="submitBtn" class="btn btn-primary w-100 py-2 fw-bold">Enviar Mensaje</button>
+                </form>
+
+                <div id="successMessage" class="d-none text-center py-4">
+                    <div class="mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                    </div>
+                    <h4 class="fw-bold">¡Enviado con éxito!</h4>
+                    <p class="text-muted">Tu mensaje ha sido recibido correctamente.</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const html = document.documentElement;
+   <script>
+    // --- LÓGICA DE TEMA (DARK/LIGHT) ---
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
 
-        themeToggle.addEventListener('click', () => {
-            const isDark = html.getAttribute('data-bs-theme') === 'dark';
-            const target = isDark ? 'light' : 'dark';
-            html.setAttribute('data-bs-theme', target);
-            localStorage.setItem('theme', target);
-            themeIcon.innerText = target === 'dark' ? '🌙' : '☀️';
+    themeToggle.addEventListener('click', () => {
+        const isDark = html.getAttribute('data-bs-theme') === 'dark';
+        const target = isDark ? 'light' : 'dark';
+        html.setAttribute('data-bs-theme', target);
+        localStorage.setItem('theme', target);
+        themeIcon.innerText = target === 'dark' ? '🌙' : '☀️';
+    });
+
+    // --- ANIMACIÓN AL HACER SCROLL ---
+    const observer = new IntersectionObserver(e => {
+        e.forEach(entry => entry.isIntersecting && entry.target.classList.add('active'));
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // --- ENVÍO DE FORMULARIO AJAX (WEB3FORMS) ---
+    const form = document.getElementById('contactForm');
+    const btn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMessage');
+
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita la recarga de página y la redirección externa
+            
+            // Estado visual: Cargando
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let jsonRes = await response.json();
+                if (response.status == 200) {
+                    // 1. Intercambiar Formulario por Mensaje de Éxito
+                    form.classList.add('d-none');
+                    successMsg.classList.remove('d-none');
+
+                    // 2. Cerrar el modal automáticamente después de 2.5 segundos
+                    setTimeout(() => {
+                        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
+                        if (modalInstance) modalInstance.hide();
+                        
+                        // 3. Resetear el modal para que esté limpio la próxima vez
+                        setTimeout(() => {
+                            form.reset();
+                            form.classList.remove('d-none');
+                            successMsg.classList.add('d-none');
+                            btn.disabled = false;
+                            btn.innerHTML = 'Enviar Mensaje';
+                        }, 500);
+                    }, 2500);
+                } else {
+                    console.log(response);
+                    alert("Error: " + jsonRes.message);
+                    btn.disabled = false;
+                    btn.innerHTML = 'Enviar Mensaje';
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Hubo un problema con la conexión.");
+                btn.disabled = false;
+                btn.innerHTML = 'Enviar Mensaje';
+            });
         });
-
-        const observer = new IntersectionObserver(e => {
-            e.forEach(entry => entry.isIntersecting && entry.target.classList.add('active'));
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+    }
+</script>
 </body>
 </html>
