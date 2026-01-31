@@ -107,7 +107,41 @@
                 </div>
             </div>
         </div>
+        
     </section>
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-card border-0">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold" id="contactModalLabel">Enviame un mensaje</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="9f557163-d3d8-4c01-afd6-eeda253ec0fc">
+                        
+                        <div class="mb-3">
+                            <label class="form-label small">Nombre Completo</label>
+                            <input type="text" name="name" class="form-control" placeholder="Juan Pérez" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small">Correo Electrónico</label>
+                            <input type="email" name="email" class="form-control" placeholder="nombre@ejemplo.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small">Mensaje</label>
+                            <textarea name="message" class="form-control" rows="4" placeholder="Hola Ariel, me gustaría contactarte por..." required></textarea>
+                        </div>
+
+                        <input type="hidden" name="from_name" value="Portfolio Ariel">
+                        <input type="hidden" name="subject" value="Nuevo contacto desde tu Portfolio">
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
